@@ -84,6 +84,8 @@
                     Laravel
                 </div>
 
+                <img src="{{ Voyager::image(setting('site.logo')) }}" alt="">
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
