@@ -25,9 +25,27 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::post('login', 'Api\AuthController@login');
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::post('refresh', 'Api\AuthController@refresh');
+    Route::post('me', 'Api\AuthController@me');
 
+});
+
+Route::group(['prefix' => 'v1','middleware' => 'api'], function (){
+
+    Route::resource('meeting', 'Api\MeetingController', [
+        'except' => ['create', 'edit']
+    ]);
+    Route::resource('meeting/registration', 'Api\RegisterMeetingController', [
+        'only' => ['store', 'destroy']
+    ]);
+
+    Route::post('/user/register', [
+        'uses' => 'Api\UsersRegistrationController@store'
+    ]);
+    /*
+    Route::post('/user/signin', [
+        'uses' => 'AuthController@signin'
+    ]);*/
 });

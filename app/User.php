@@ -39,6 +39,9 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function meetings(){
+        return $this->belongsToMany(Meeting::class);
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
