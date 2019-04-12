@@ -1,0 +1,169 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Meeting Scheduler API",
+        "version": "1.0.0"
+    },
+    "host": "restfulapi",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/v1/meeting": {
+            "get": {
+                "tags": [
+                    "Meeting"
+                ],
+                "summary": "Get list of All Meetings",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Meeting"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Meeting"
+                ],
+                "summary": "Add a new meeting to the store",
+                "description": "Create meeting",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create meeting",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "format": "text"
+                                },
+                                "time": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Meeting"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/meeting/{meeting_id}": {
+            "get": {
+                "tags": [
+                    "Meeting"
+                ],
+                "summary": "Get meeting by id",
+                "description": "Get meeting by id",
+                "parameters": [
+                    {
+                        "name": "meeting_id",
+                        "in": "path",
+                        "description": "Meeting id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Meeting"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Post is not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Meeting": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "User": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        },
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

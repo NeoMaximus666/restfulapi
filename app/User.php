@@ -8,6 +8,30 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @SWG\Definition(
+ *  definition="User",
+ *  @SWG\Property(
+ *      property="id",
+ *      type="integer",
+ *      format="int64"
+ *  ),
+ *  @SWG\Property(
+ *      property="name",
+ *      type="string"
+ *  ),
+ *  @SWG\Property(
+ *      property="email",
+ *      type="string",
+ *      format="email"
+ *  ),
+ *  @SWG\Property(
+ *      property="password",
+ *      type="string",
+ *      format="password"
+ *  )
+ * )
+ */
 class User extends \TCG\Voyager\Models\User implements JWTSubject
 {
     use Notifiable;

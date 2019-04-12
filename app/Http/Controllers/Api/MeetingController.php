@@ -17,6 +17,26 @@ class MeetingController extends Controller
     }
 
     /**
+     * @SWG\Get(
+     *     path="/api/v1/meeting",
+     *     summary="Get list of All Meetings",
+     *     tags={"Meeting"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Meeting")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Not found",
+     *     ),
+     * )
+     */
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,6 +56,54 @@ class MeetingController extends Controller
         ];
         return response()->json($response, 200);
     }
+
+    /**
+     * @SWG\Post(
+     *     path="/api/v1/meeting",
+     *     summary="Add a new meeting to the store",
+     *     tags={"Meeting"},
+     *     description="Create meeting",
+     *     security={{"JWT":{}}},
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Create meeting",
+     *         required=true,
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="title",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="description",
+     *                  type="string",
+     *                  format="text"
+     *              ),
+     *              @SWG\Property(
+     *                  property="time",
+     *                  type="string",
+     *                  format="date-time"
+     *              ),
+     *              @SWG\Property(
+     *                  property="user_id",
+     *                  type="integer"
+     *              )
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Meeting")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
 
     /**
      * Store a newly created resource in storage.
@@ -110,6 +178,35 @@ class MeetingController extends Controller
         ];
         return response()->json($response, 404);
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/api/v1/meeting/{meeting_id}",
+     *     summary="Get meeting by id",
+     *     tags={"Meeting"},
+     *     description="Get meeting by id",
+     *     @SWG\Parameter(
+     *         name="meeting_id",
+     *         in="path",
+     *         description="Meeting id",
+     *         required=true,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/Meeting"),
+     *     ),
+     *     @SWG\Response(
+     *         response="401",
+     *         description="Unauthorized user",
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Meeting is not found",
+     *     )
+     * )
+     */
 
     /**
      * Display the specified resource.
