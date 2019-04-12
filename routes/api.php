@@ -44,8 +44,4 @@ Route::group(['prefix' => 'v1','middleware' => 'api'], function (){
     Route::post('/user/register', [
         'uses' => 'Api\UsersRegistrationController@store'
     ]);
-    /*
-    Route::post('/user/signin', [
-        'uses' => 'AuthController@signin'
-    ]);*/
 });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Meeting;
 use App\User;
+use App\Http\Requests\StoreRegisterMeetingValid;
 
 class RegisterMeetingController extends Controller
 {
@@ -20,13 +21,13 @@ class RegisterMeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRegisterMeetingValid $request)
     {
 
-        $this->validate($request, [
+        /*$this->validate($request, [
             'meeting_id' => 'required',
             'user_id' => 'required'
-        ]);
+        ]);*/
 
 
         $meeting_id = $request->input('meeting_id');

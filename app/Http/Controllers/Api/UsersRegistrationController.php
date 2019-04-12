@@ -8,17 +8,19 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+use App\Http\Requests\UsersRegistrationValid;
+
 class UsersRegistrationController extends Controller
 {
     //реєстрація user через api
-    public function store(Request $request)
+    public function store(UsersRegistrationValid $request)
     {
 
-        $this->validate($request, [
+        /*$this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:5'
-        ]);
+        ]);*/
 
 
         $name = $request->input('name');

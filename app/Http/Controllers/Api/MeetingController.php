@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Meeting;
 
+use App\Http\Requests\StoreMeetingValid;
+
 class MeetingController extends Controller
 {
     public function __construct()
@@ -41,15 +43,15 @@ class MeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMeetingValid $request)
     {
 
-        $this->validate($request, [
+        /*$this->validate($request, [
             'title' => 'required',
             'description' => 'required',
             'time' => 'required',
             'user_id' => 'required'
-        ]);
+        ]);*/
 
         //$validated = $request->validated();
 
@@ -136,14 +138,14 @@ class MeetingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreMeetingValid $request, $id)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             'title' => 'required',
             'description' => 'required',
             'time' => 'required|date_format:YmdHie',
             'user_id' => 'required'
-        ]);
+        ]);*/
 
         $title = $request->input('title');
         $description = $request->input('description');
